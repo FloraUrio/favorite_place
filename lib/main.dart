@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:places/home.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:places/screens/home.dart';
 
 var kColorScheme = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 96, 52, 80));
 var kDarkScheme =  ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 46, 51, 65), 
    brightness: Brightness.dark
 );
 void main(){
+  
   runApp(
-   MyApp()
+  ProviderScope(
+    child: MyApp())
     
   );
 }
