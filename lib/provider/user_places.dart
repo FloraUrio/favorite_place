@@ -3,11 +3,7 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:places/models/places.dart';
 
-final userPlacesProvider = StateNotifierProvider<UserPlacesNotifier, List<Places>>((ref)
-{
- return UserPlacesNotifier();
-}
-);
+
 
 class UserPlacesNotifier extends StateNotifier< List<Places>>{
     UserPlacesNotifier():super(const []);
@@ -17,3 +13,9 @@ class UserPlacesNotifier extends StateNotifier< List<Places>>{
       state = [newPlace, ...state];
     }
 }
+
+final userPlacesProvider = StateNotifierProvider<UserPlacesNotifier, List<Places>>((ref)
+{
+ return UserPlacesNotifier();
+}
+);

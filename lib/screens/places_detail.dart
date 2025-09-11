@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:places/provider/user_places.dart';
 import 'package:places/widgets/image_input.dart';
+import 'package:places/widgets/location_input.dart';
 
 class AddPlaces extends ConsumerStatefulWidget {
   const AddPlaces({super.key});
@@ -20,19 +21,21 @@ class _AddPlacesState extends ConsumerState<AddPlaces> {
 
   void saveitem(){
     final enteredTitle = titleController.text;
-    // ignore: unrelated_type_equality_checks
-    if(enteredTitle == Null || enteredTitle.isEmpty){
+    
+    if(selectedImage == null || enteredTitle.isEmpty){
       return;
+      
     }
     ref.read(userPlacesProvider.notifier).addNewPlace(enteredTitle, selectedImage!);
+
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('add new place')),
-      body: Padding(
-        padding: EdgeInsetsGeometry.all(10),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             TextField(
@@ -40,11 +43,18 @@ class _AddPlacesState extends ConsumerState<AddPlaces> {
               controller: titleController,
               decoration: InputDecoration(label: Text('place name')),
             ),
+                
+            SizedBox(height: 8,),
             ImageInput(
               onPickedImage: (image) {
                 selectedImage = image;
               },
             ),
+                
+            SizedBox(height: 8,),
+            LocationInput(),
+                
+            SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
